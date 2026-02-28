@@ -119,8 +119,8 @@ const HeroSection = () => {
             style={{ transformOrigin: "left" }}
           />
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed font-body">
-            Software Engineer building scalable backend systems & production-grade APIs.
-            1+ year designing high-performance architectures handling 10K+ daily requests.
+            Software Engineer crafting full-stack web & Flutter mobile apps with scalable backend systems.
+            1+ year building production-grade platforms handling 10K+ daily requests.
           </p>
         </motion.div>
 
