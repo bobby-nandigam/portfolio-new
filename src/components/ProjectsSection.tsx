@@ -4,14 +4,14 @@ import { ShoppingCart, MessageSquareCode, HardDrive, Microscope, ArrowUpRight } 
 const projects = [
   {
     icon: ShoppingCart,
-    title: "Rupeecom E-commerce Backend",
-    subtitle: "Multi-tenant e-commerce platform optimization",
-    metrics: ["45% faster page load", "Scalable microservice architecture"],
+    title: "Rupeecom E-commerce Platform",
+    subtitle: "Full-stack e-commerce website & Flutter mobile app",
+    metrics: ["45% faster page load", "Cross-platform Flutter app"],
     points: [
-      "Enhanced backend architecture supporting high traffic and scalable operations",
-      "Optimized asset delivery pipelines and API request handling",
-      "Improved database performance using indexing and optimized queries",
-      "Applied structured testing, logging, and review practices",
+      "Built a complete e-commerce website with product catalog, cart, checkout & payment flows",
+      "Developed cross-platform Flutter mobile app with seamless user experience",
+      "Optimized asset delivery pipelines and API request handling for fast performance",
+      "Implemented responsive UI, real-time inventory updates & order tracking",
     ],
   },
   {
@@ -52,6 +52,20 @@ const projects = [
   },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.7,
+      delay: i * 0.12,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+    },
+  }),
+};
+
 const ProjectsSection = () => {
   return (
     <section className="py-24 px-6" id="projects">
@@ -60,49 +74,76 @@ const ProjectsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="mb-16"
         >
           <span className="text-primary text-sm font-display tracking-widest uppercase">Work</span>
           <h2 className="text-4xl md:text-5xl font-display font-bold mt-2">Projects</h2>
+          <motion.div 
+            className="w-20 h-[2px] bg-primary mt-4"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            style={{ transformOrigin: "left" }}
+          />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group p-6 bg-card border border-border rounded-lg hover:border-primary/40 transition-all duration-300 flex flex-col"
+              variants={cardVariants}
+              whileHover={{ y: -6, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }}
+              className="group relative p-6 bg-card border border-border rounded-xl flex flex-col overflow-hidden transition-colors duration-500 hover:border-primary/40"
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <project.icon className="w-6 h-6 text-primary" />
+              {/* Liquid hover glow */}
+              <motion.div
+                className="absolute inset-0 bg-primary/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+              />
+              
+              {/* Top accent line that fills on hover */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-border overflow-hidden">
+                <motion.div 
+                  className="h-full bg-primary w-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"
+                />
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-5">
+                  <motion.div 
+                    className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-500"
+                    whileHover={{ rotate: 5 }}
+                  >
+                    <project.icon className="w-6 h-6 text-primary" />
+                  </motion.div>
+                  <ArrowUpRight className="w-5 h-5 text-dim group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
                 </div>
-                <ArrowUpRight className="w-5 h-5 text-dim group-hover:text-primary transition-colors" />
+
+                <h3 className="text-lg font-display font-bold text-foreground mb-1">{project.title}</h3>
+                <p className="text-sm text-muted-foreground mb-4">{project.subtitle}</p>
+
+                <div className="flex gap-2 mb-5 flex-wrap">
+                  {project.metrics.map((m) => (
+                    <span key={m} className="px-3 py-1 bg-primary/10 text-primary text-xs font-display font-medium rounded-md border border-primary/10">
+                      {m}
+                    </span>
+                  ))}
+                </div>
+
+                <ul className="space-y-2.5 mt-auto">
+                  {project.points.map((p, j) => (
+                    <li key={j} className="text-xs text-muted-foreground leading-relaxed flex items-start gap-2.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0 mt-1" />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              <h3 className="text-lg font-display font-bold text-foreground mb-1">{project.title}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{project.subtitle}</p>
-
-              <div className="flex gap-2 mb-5 flex-wrap">
-                {project.metrics.map((m) => (
-                  <span key={m} className="px-3 py-1 bg-primary/10 text-primary text-xs font-display font-medium rounded-md">
-                    {m}
-                  </span>
-                ))}
-              </div>
-
-              <ul className="space-y-2 mt-auto">
-                {project.points.map((p, j) => (
-                  <li key={j} className="text-xs text-muted-foreground leading-relaxed flex items-start gap-2">
-                    <span className="w-1 h-1 rounded-full bg-primary shrink-0 mt-1.5" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
             </motion.div>
           ))}
         </div>
