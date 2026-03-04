@@ -31,8 +31,17 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#" className="font-display font-bold text-lg text-foreground">
-            B<span className="text-primary">.</span>N
+          <a href="#" className="flex items-center gap-1.5 group">
+            <motion.div
+              className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center font-display font-bold text-sm text-primary-foreground tracking-tight group-hover:rounded-xl transition-all duration-500"
+              whileHover={{ rotate: -8, scale: 1.08 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            >
+              BN
+            </motion.div>
+            <span className="font-display font-bold text-foreground text-sm hidden sm:inline">
+              bobby<span className="text-primary">.</span>dev
+            </span>
           </a>
 
           {/* Desktop */}
