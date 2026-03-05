@@ -10,6 +10,12 @@ export default defineConfig(({ mode }) => ({
     hmr: {
       overlay: false,
     },
+    // allow render and custom domains for preview/testing
+    allowedHosts: [
+      "portfolio-new-y35j.onrender.com",
+      "www.bobbbynandigam.in",
+      "bobbynandigam.in",
+    ],
   },
   plugins: [react()],
   resolve: {
