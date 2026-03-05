@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { label: "Skills", href: "#skills" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Education", href: "#education" },
-  { label: "Contact", href: "#contact" },
+  { label: "Skills", href: "#skills", num: "01" },
+  { label: "Experience", href: "#experience", num: "02" },
+  { label: "Projects", href: "#projects", num: "03" },
+  { label: "Education", href: "#education", num: "04" },
+  { label: "Contact", href: "#contact", num: "05" },
 ];
 
 const Navbar = () => {
@@ -27,32 +27,26 @@ const Navbar = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-background/80 backdrop-blur-xl border-b border-border" : ""
+          scrolled ? "bg-background/90 backdrop-blur-xl border-b border-border" : ""
         }`}
       >
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-1.5 group">
-            <motion.div
-              className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center font-display font-bold text-sm text-primary-foreground tracking-tight group-hover:rounded-xl transition-all duration-500"
-              whileHover={{ rotate: -8, scale: 1.08 }}
-              transition={{ type: "spring", stiffness: 400, damping: 15 }}
-            >
-              BN
-            </motion.div>
-            <span className="font-display font-bold text-foreground text-sm hidden sm:inline">
-              bobby<span className="text-primary">.</span>dev
-            </span>
+        <div className="max-w-6xl mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
+          <a href="#" className="flex items-center gap-2 group">
+            <div className="font-mono text-xs text-dim">
+              <span className="text-primary">$</span> bobby.dev
+            </div>
           </a>
 
           {/* Desktop */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors font-display"
+                className="flex items-center gap-1.5 text-sm text-dim hover:text-foreground transition-colors font-display group"
               >
-                {item.label}
+                <span className="font-mono text-[10px] text-primary opacity-0 group-hover:opacity-100 transition-opacity">{item.num}</span>
+                <span>{item.label}</span>
               </a>
             ))}
           </div>
@@ -82,8 +76,9 @@ const Navbar = () => {
                   key={item.label}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-2xl font-display font-bold text-foreground hover:text-primary transition-colors"
+                  className="flex items-center gap-3 text-2xl font-display font-bold text-foreground"
                 >
+                  <span className="font-mono text-sm text-primary">{item.num}</span>
                   {item.label}
                 </a>
               ))}
